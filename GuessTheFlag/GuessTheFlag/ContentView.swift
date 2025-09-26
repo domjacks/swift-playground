@@ -42,7 +42,7 @@ struct ContentView: View {
                         Button {
                             flagTapped(number)
                         } label: {
-                            Image(countries[number]).clipShape(.capsule).shadow(radius: 5)
+                            FlagImage(countries[number])
                         }
                     }
                 }
@@ -91,7 +91,7 @@ struct ContentView: View {
         showingScore = true
         questionsAsked += 1
         
-        if questionsAsked == 2 {
+        if questionsAsked == 5 {
             gameOver = true
         }
     }
