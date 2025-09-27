@@ -8,34 +8,29 @@
 import SwiftUI
 
 struct ContentView: View {
-    @State private var appChoice = Int.random(in: 0...2)
+    @State private var appChoice = RPSChoice.allCases.randomElement()!
     @State private var tryingToWin: Bool = Bool.random()
     @State private var gameOver = false
     @State private var questionsAsked = 0
     
-    let choices = [("🪨", "✂️"), ("📄", "🪨"), ("✂️", "📄")]
+    let choices = RPSChoice.allCases
     
     @State private var playerScore = 0
     
     var body: some View {
         VStack {
-            
-            Text("Try to \(tryingToWin ? "win" : "lose") against \(choices[appChoice].0)")
+            Text("Try to \(tryingToWin ? "win" : "lose") against \(appChoice.emoji)")
                 .font(.title)
-            
             Spacer()
-            
             HStack {
-                ForEach(choices, id: \.0) { choice in
-                    Button(choice.0) {
-                        checkSuccess(selected: choice.0, opponent: choices[appChoice].0)
+                ForEach(choices, id: \ .self) { choice in
+                    Button(choice.emoji) {
+                        checkSuccess(selected: choice, opponent: appChoice)
                     }
                     .massiveText()
                 }
             }
-            
             Spacer()
-            
             Text("Score: \(playerScore)")
                 .font(.title)
         }
@@ -48,12 +43,10 @@ struct ContentView: View {
         }
     }
     
-    func checkSuccess(selected: String, opponent: String) {
+    func checkSuccess(selected: RPSChoice, opponent: RPSChoice) {
         var success: Bool
-        let canBeat = choices.first(where: { $0.0 == selected })?.1
-        
+        let canBeat = selected.beats
         printDebug(selected: selected, opponent: opponent, canBeat: canBeat)
-       
         if selected == opponent {
             success = false
         }
@@ -62,13 +55,10 @@ struct ContentView: View {
         } else {
             success = canBeat != opponent
         }
-        
         if success {
             playerScore += 1
         }
-        
         questionsAsked += 1
-        
         if questionsAsked >= 3 {
             gameOver = true
         } else {
@@ -77,7 +67,7 @@ struct ContentView: View {
     }
     
     func nextRound() {
-        appChoice = Int.random(in: 0...2)
+        appChoice = RPSChoice.allCases.randomElement()!
         tryingToWin.toggle()
     }
     
@@ -87,11 +77,11 @@ struct ContentView: View {
         nextRound()
     }
     
-    func printDebug(selected: String, opponent: String, canBeat: String?) {
-        print("selected: \(selected)")
-        print("opponent: \(opponent)")
+    func printDebug(selected: RPSChoice, opponent: RPSChoice, canBeat: RPSChoice) {
+        print("selected: \(selected.emoji)")
+        print("opponent: \(opponent.emoji)")
         print("trying to win: \(tryingToWin)")
-        print("with \(selected), you can beat \(canBeat ?? "nothing")")
+        print("with \(selected.emoji), you can beat \(canBeat.emoji)")
     }
 }
 
