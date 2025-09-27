@@ -30,7 +30,7 @@ struct ContentView: View {
                     Button(choice.0) {
                         checkSuccess(selected: choice.0, opponent: choices[appChoice].0)
                     }
-                    .font(.system(size: 100))
+                    .massiveText()
                 }
             }
             
