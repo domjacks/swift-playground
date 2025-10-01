@@ -1,0 +1,29 @@
+{
+  "activityEntities" : [
+    "projectCreated",
+    [
+      {
+        "createdDate" : "2025-09-29T13:52:17Z",
+        "event" : "projectCreated",
+        "id" : "38F822F3-844B-4852-84FA-845A66C5FEF3",
+        "subtitle" : "BetterRest",
+        "title" : "Project Created"
+      }
+    ]
+  ],
+  "authorName" : "Dom Jackson",
+  "createdDate" : "2025-09-29T13:52:17Z",
+  "description" : "",
+  "id" : "8EF2449F-C949-4410-9C09-817546EEADD5",
+  "license" : "",
+  "location" : "",
+  "modifiedDate" : "2025-09-29T13:52:17Z",
+  "projectName" : "BetterRest",
+  "settingsEntity" : {
+    "snapshotOnExtendTraining" : true,
+    "snapshotOnResumeTraining" : false
+  },
+  "taskType" : "generalRegresor",
+  "title" : "Tabular Regression",
+  "version" : "1.1"
+}
